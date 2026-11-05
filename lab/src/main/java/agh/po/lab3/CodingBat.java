@@ -1,8 +1,28 @@
 package agh.po.lab3;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Arrays;
 
 public class CodingBat {
+
+    public Map<String, Integer> wordLen(String[] strings) {
+        Map<String, Integer> map = new HashMap<>();
+
+        for (String slowo : strings) {
+            map.put(slowo, slowo.length());
+        }
+
+        return map;
+    }
+
+    public Map<String, String> mapAB(Map<String, String> map) {
+        if (map.containsKey("a") && map.containsKey("b")) {
+            map.put("ab", map.get("a") + map.get("b"));
+        }
+
+        return map;
+    }
 
     public int sumDigits(String str) {
         int suma = 0;

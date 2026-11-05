@@ -3,10 +3,86 @@ package agh.po.lab3;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+import java.util.Map;
+import java.util.HashMap;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 public class CodingBatTest {
 
     private final CodingBat codingBat = new CodingBat();
+
+    @Test
+    void mapABTest() {
+        Map<String, String> map =
+                new HashMap<>(Map.of("a", "Hi", "b", "There"));
+
+        Map<String, String> wynik = codingBat.mapAB(map);
+
+        assertEquals(
+                Map.of("a", "Hi", "b", "There", "ab", "HiThere"),
+                wynik
+        );
+
+        assertSame(map, wynik);
+
+        assertEquals(
+                Map.of("a", "Hi"),
+                codingBat.mapAB(new HashMap<>(Map.of("a", "Hi")))
+        );
+
+        assertEquals(
+                Map.of("b", "There"),
+                codingBat.mapAB(new HashMap<>(Map.of("b", "There")))
+        );
+
+        assertEquals(
+                Map.of(),
+                codingBat.mapAB(new HashMap<>())
+        );
+
+
+        assertEquals(
+                Map.of("a", "x", "b", "y", "ab", "xy", "other", "ok"),
+                codingBat.mapAB(new HashMap<>(
+                        Map.of("a", "x", "b", "y", "ab", "old", "other", "ok")
+                ))
+        );
+
+        assertEquals(
+                Map.of("a", "", "b", "", "ab", ""),
+                codingBat.mapAB(new HashMap<>(Map.of("a", "", "b", "")))
+        );
+    }
+
+    @Test
+    void wordLenTest() {
+        assertEquals(
+                Map.of("a", 1, "bb", 2),
+                codingBat.wordLen(new String[]{"a", "bb", "a", "bb"})
+        );
+
+        assertEquals(
+                Map.of("this", 4, "and", 3, "that", 4),
+                codingBat.wordLen(new String[]{"this", "and", "that", "and"})
+        );
+
+        assertEquals(
+                Map.of("code", 4, "bug", 3),
+                codingBat.wordLen(new String[]{"code", "code", "code", "bug"})
+        );
+
+        assertEquals(
+                Map.of(),
+                codingBat.wordLen(new String[]{})
+        );
+
+        assertEquals(
+                Map.of("", 0, "hi", 2),
+                codingBat.wordLen(new String[]{"", "hi", "", "hi"})
+        );
+    }
 
     @Test
     void sumDigitsTest() {
